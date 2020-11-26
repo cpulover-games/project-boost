@@ -413,15 +413,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4985014883277869171, guid: 0724694f1a360474297dcf0391a772ed,
-        type: 3}
-      propertyPath: rotateSpeed
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 1691383985774982508, guid: 0724694f1a360474297dcf0391a772ed,
         type: 3}
       propertyPath: m_Mass
-      value: 0.1
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335195105275735418, guid: 0724694f1a360474297dcf0391a772ed,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8335195105275735418, guid: 0724694f1a360474297dcf0391a772ed,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9198684654430722052, guid: 0724694f1a360474297dcf0391a772ed,
         type: 3}
