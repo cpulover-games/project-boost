@@ -23,6 +23,19 @@ public class Rocket : MonoBehaviour
         HandleInput();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("Safe");
+                break;
+            default:
+                print("Dead");
+                break;
+        }
+    }
+
     private void HandleInput()
     {
         HandleThrust();
