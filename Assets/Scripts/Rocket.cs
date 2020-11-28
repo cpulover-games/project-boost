@@ -13,6 +13,9 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;
     [SerializeField] float rotateSpeed = 30f;
     [SerializeField] float thrustSpeed = 10f;
+    [SerializeField] AudioClip thrustSound;
+    [SerializeField] AudioClip dieSound;
+    [SerializeField] AudioClip successSound;
 
     // Start is called before the first frame update
     void Start()
@@ -29,16 +32,22 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (state != State.ALIVE) return;
+
         switch (collision.gameObject.tag)
         {
             case "Friendly":
                 break;
             case "Finish":
                 state = State.TRANSCENDING;
+                audioSource.Stop();
+                audioSource.PlayOneShot(successSound);
                 Invoke(nameof(LoadNextLevel), 1f);
                 break;
             default:
                 state = State.DYING;
+                audioSource.Stop();
+                audioSource.PlayOneShot(dieSound);
                 Invoke(nameof(ResetLevel), 1f);
                 break;
         }
@@ -82,7 +91,7 @@ public class Rocket : MonoBehaviour
         {
             rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime * thrustSpeed);
             if (!audioSource.isPlaying)
-                audioSource.Play();
+                audioSource.PlayOneShot(thrustSound);
         }
         else
         {

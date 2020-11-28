@@ -431,6 +431,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotateSpeed: 35
   thrustSpeed: 650
+  thrustSound: {fileID: 8300000, guid: 8fde64d61ff5f2d4cb7bcc1135f4d3e4, type: 3}
+  dieSound: {fileID: 8300000, guid: 9c55993526cc5a24a97c87f633e580b0, type: 3}
+  successSound: {fileID: 8300000, guid: 45726b31816da5b45ac0cad26a6dfba9, type: 3}
 --- !u!54 &1691383985774982508
 Rigidbody:
   m_ObjectHideFlags: 0
