@@ -6,16 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
-    enum State { ALIVE,DYING, TRANSCENDING};
-
+    enum State { ALIVE, DYING, TRANSCENDING };
     State state = State.ALIVE;
+
     Rigidbody rigidBody;
     AudioSource audioSource;
+
     [SerializeField] float rotateSpeed = 30f;
     [SerializeField] float thrustSpeed = 10f;
+
     [SerializeField] AudioClip thrustSound;
     [SerializeField] AudioClip dieSound;
     [SerializeField] AudioClip successSound;
+
+    [SerializeField] ParticleSystem thrustParticle;
+    [SerializeField] ParticleSystem dieParticle;
+    [SerializeField] ParticleSystem successParticle;
 
     // Start is called before the first frame update
     void Start()
@@ -42,12 +48,16 @@ public class Rocket : MonoBehaviour
                 state = State.TRANSCENDING;
                 audioSource.Stop();
                 audioSource.PlayOneShot(successSound);
+                successParticle.Play();
                 Invoke(nameof(LoadNextLevel), 1f);
                 break;
             default:
                 state = State.DYING;
                 audioSource.Stop();
                 audioSource.PlayOneShot(dieSound);
+                if (thrustParticle.isPlaying)
+                    thrustParticle.Stop();
+                dieParticle.Play();
                 Invoke(nameof(ResetLevel), 1f);
                 break;
         }
@@ -92,10 +102,12 @@ public class Rocket : MonoBehaviour
             rigidBody.AddRelativeForce(Vector3.up * Time.deltaTime * thrustSpeed);
             if (!audioSource.isPlaying)
                 audioSource.PlayOneShot(thrustSound);
+            thrustParticle.Play();
         }
         else
         {
             audioSource.Stop();
+            thrustParticle.Stop();
         }
     }
 }

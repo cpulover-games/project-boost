@@ -1270,11 +1270,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4985014883277869171, guid: 0724694f1a360474297dcf0391a772ed,
-        type: 3}
-      propertyPath: thrustSpeed
-      value: 650
-      objectReference: {fileID: 0}
     - target: {fileID: 9198684654430722052, guid: 0724694f1a360474297dcf0391a772ed,
         type: 3}
       propertyPath: m_LocalPosition.x
