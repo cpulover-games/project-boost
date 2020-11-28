@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 35
-  thrustSpeed: 700
+  thrustSpeed: 650
 --- !u!54 &1691383985774982508
 Rigidbody:
   m_ObjectHideFlags: 0

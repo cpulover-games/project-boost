@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Rocket : MonoBehaviour
 {
+    enum State { ALIVE,DYING, TRANSCENDING};
+
+    State state = State.ALIVE;
     Rigidbody rigidBody;
     AudioSource audioSource;
     [SerializeField] float rotateSpeed = 30f;
@@ -29,21 +32,35 @@ public class Rocket : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Friendly":
-                print("Safe");
                 break;
             case "Finish":
-                SceneManager.LoadScene(1);
+                state = State.TRANSCENDING;
+                Invoke(nameof(LoadNextLevel), 1f);
                 break;
             default:
-                SceneManager.LoadScene(0);
+                state = State.DYING;
+                Invoke(nameof(ResetLevel), 1f);
                 break;
         }
     }
 
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    private void ResetLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     private void HandleInput()
     {
-        HandleThrust();
-        HandleRotate();
+        if (state == State.ALIVE)
+        {
+            HandleThrust();
+            HandleRotate();
+        }
     }
 
     private void HandleRotate()
