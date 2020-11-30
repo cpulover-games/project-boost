@@ -12,6 +12,8 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidBody;
     AudioSource audioSource;
 
+    float loadLevelDelay = 2f;
+
     [SerializeField] float rotateSpeed = 30f;
     [SerializeField] float thrustSpeed = 10f;
 
@@ -49,16 +51,16 @@ public class Rocket : MonoBehaviour
                 audioSource.Stop();
                 audioSource.PlayOneShot(successSound);
                 successParticle.Play();
-                Invoke(nameof(LoadNextLevel), 1f);
+                Invoke(nameof(LoadNextLevel), loadLevelDelay);
                 break;
             default:
                 state = State.DYING;
                 audioSource.Stop();
-                audioSource.PlayOneShot(dieSound);
+                audioSource.PlayOneShot(dieSound, 0.5f);
                 if (thrustParticle.isPlaying)
                     thrustParticle.Stop();
                 dieParticle.Play();
-                Invoke(nameof(ResetLevel), 1f);
+                Invoke(nameof(ResetLevel), loadLevelDelay);
                 break;
         }
     }
