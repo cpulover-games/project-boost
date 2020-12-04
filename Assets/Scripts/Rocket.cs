@@ -67,12 +67,23 @@ public class Rocket : MonoBehaviour
 
     private void LoadNextLevel()
     {
-        SceneManager.LoadScene(1);
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentLevelIndex < SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(currentLevelIndex + 1);
+        }
+        else
+        {
+            // loop level
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void ResetLevel()
     {
-        SceneManager.LoadScene(0);
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentLevelIndex);
     }
 
     private void HandleInput()
