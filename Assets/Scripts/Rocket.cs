@@ -86,6 +86,8 @@ public class Rocket : MonoBehaviour
 
     private void HandleRotate()
     {
+        // remove rotation due to physics
+        rigidBody.angularVelocity = Vector3.zero;
         if (Input.GetKey(KeyCode.A))
         {
             // Rotate the object around its local X axis at rotateSpeed degree/s
